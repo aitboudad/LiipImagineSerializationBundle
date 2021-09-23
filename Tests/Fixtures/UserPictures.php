@@ -12,7 +12,7 @@
 namespace Bukashk0zzz\LiipImagineSerializationBundle\Tests\Fixtures;
 
 use Bukashk0zzz\LiipImagineSerializationBundle\Annotation as Bukashk0zzz;
-use Doctrine\Common\Persistence\Proxy;
+use Doctrine\Persistence\Proxy;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\HttpFoundation\File\File;

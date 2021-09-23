@@ -13,8 +13,8 @@ namespace Bukashk0zzz\LiipImagineSerializationBundle\EventListener;
 use Bukashk0zzz\LiipImagineSerializationBundle\Annotation\LiipImagineSerializableField;
 use Bukashk0zzz\LiipImagineSerializationBundle\Event\UrlNormalizerEvent;
 use Bukashk0zzz\LiipImagineSerializationBundle\Normalizer\UrlNormalizerInterface;
-use Doctrine\Common\Annotations\CachedReader;
-use Doctrine\Common\Persistence\Proxy;
+use Doctrine\Common\Annotations\Reader;
+use Doctrine\Persistence\Proxy;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -32,7 +32,7 @@ class JmsSerializeListenerAbstract
     protected $requestContext;
 
     /**
-     * @var CachedReader Cached annotation reader
+     * @var Reader Annotation reader
      */
     protected $annotationReader;
 
@@ -63,7 +63,7 @@ class JmsSerializeListenerAbstract
      */
     public function __construct(
         RequestContext $requestContext,
-        CachedReader $annotationReader,
+        Reader $annotationReader,
         CacheManager $cacheManager,
         StorageInterface $vichStorage,
         EventDispatcherInterface $eventDispatcher,

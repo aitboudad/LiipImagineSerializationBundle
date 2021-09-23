@@ -16,8 +16,6 @@ use Bukashk0zzz\LiipImagineSerializationBundle\Tests\EventSubscriber\Bukashk0zzz
 use Bukashk0zzz\LiipImagineSerializationBundle\Tests\Fixtures\User;
 use Bukashk0zzz\LiipImagineSerializationBundle\Tests\Fixtures\UserPictures;
 use Doctrine\Common\Annotations\AnnotationReader;
-use Doctrine\Common\Annotations\CachedReader;
-use Doctrine\Common\Cache\ArrayCache;
 use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\EventDispatcher\EventDispatcher;
 use JMS\Serializer\EventDispatcher\Events as JmsEvents;
@@ -38,7 +36,7 @@ class JmsSerializeEventsManager
     private $dispatcher;
 
     /**
-     * @var CachedReader Cached annotation reader
+     * @var AnnotationReader Annotation reader
      */
     private $annotationReader;
 
@@ -52,7 +50,7 @@ class JmsSerializeEventsManager
      */
     public function __construct()
     {
-        $this->annotationReader = new CachedReader(new AnnotationReader(), new ArrayCache());
+        $this->annotationReader = new AnnotationReader();
         $this->symfonyEventDispatcher = new SymfonyEventDispatcher();
     }
 
