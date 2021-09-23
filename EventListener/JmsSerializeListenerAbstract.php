@@ -14,7 +14,7 @@ use Bukashk0zzz\LiipImagineSerializationBundle\Annotation\LiipImagineSerializabl
 use Bukashk0zzz\LiipImagineSerializationBundle\Event\UrlNormalizerEvent;
 use Bukashk0zzz\LiipImagineSerializationBundle\Normalizer\UrlNormalizerInterface;
 use Doctrine\Common\Annotations\CachedReader;
-use Doctrine\Common\Persistence\Proxy;
+use Doctrine\Persistence\Proxy;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
