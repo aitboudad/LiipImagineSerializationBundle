@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping\Annotation;
  * @Annotation()
  * @Target({"CLASS", "ANNOTATION"})
  */
+#[\Attribute(\Attribute::TARGET_CLASS)]
 final class LiipImagineSerializableClass implements Annotation
 {
 }

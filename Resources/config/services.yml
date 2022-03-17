@@ -6,11 +6,15 @@ services:
     _defaults:
         public: true
 
+    bukashk0zzz_liip_imagine.metadata.attribute_reader:
+        class:  Bukashk0zzz\LiipImagineSerializationBundle\Metadata\AttributeReader
+        public: false
+
     bukashk0zzz_liip_imagine_pre_serialization.listener:
         class: '%bukashk0zzz_liip_imagine_pre_serialization.listener.class%'
         arguments:
             - '@router.request_context'
-            - '@annotations.cached_reader'
+            - '@bukashk0zzz_liip_imagine.metadata.attribute_reader'
             - '@liip_imagine.cache.manager'
             - '@vich_uploader.storage'
             - '@event_dispatcher'
@@ -21,7 +25,7 @@ services:
         class: '%bukashk0zzz_liip_imagine_post_serialization.listener.class%'
         arguments:
             - '@router.request_context'
-            - '@annotations.cached_reader'
+            - '@bukashk0zzz_liip_imagine.metadata.attribute_reader'
             - '@liip_imagine.cache.manager'
             - '@vich_uploader.storage'
             - '@event_dispatcher'

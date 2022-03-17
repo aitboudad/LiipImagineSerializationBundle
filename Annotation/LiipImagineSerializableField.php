@@ -18,54 +18,41 @@ use Doctrine\ORM\Mapping\Annotation;
  * @Annotation()
  * @Target({"PROPERTY", "METHOD"})
  */
+#[\Attribute(\Attribute::TARGET_PROPERTY | \Attribute::TARGET_METHOD)]
 final class LiipImagineSerializableField implements Annotation
 {
     /**
      * @var string|string[]|null LiipImagine Filter
      */
-    private $filter;
+    public $filter;
 
     /**
      * @var string Field
      */
-    private $vichUploaderField;
+    public $vichUploaderField;
 
     /**
      * @var string Virtual Field
      */
-    private $virtualField;
+    public $virtualField;
 
     /**
      * @var mixed[] Options
      */
-    private $options;
+    public $options;
 
     /**
      * Constructor
-     *
-     * @param mixed[] $options Options
      */
-    public function __construct(array $options)
+    public function __construct(
+        $filter = null,
+        ?string $vichUploaderField = null,
+        ?string $virtualField = null,
+    )
     {
-        $this->options = $options;
-
-        if (!\array_key_exists('value', $this->options) && !\array_key_exists('filter', $this->options)) {
-            throw new \LogicException(\sprintf('Either "value" or "filter" option must be set.'));
-        }
-
-        if ($this->checkOption('value', true)) {
-            $this->setFilter($options['value']);
-        } elseif ($this->checkOption('filter', true)) {
-            $this->setFilter($this->options['filter']);
-        }
-
-        if ($this->checkOption('vichUploaderField', false)) {
-            $this->setVichUploaderField($this->options['vichUploaderField']);
-        }
-
-        if ($this->checkOption('virtualField', false)) {
-            $this->setVirtualField($this->options['virtualField']);
-        }
+        $this->filter = $filter;
+        $this->vichUploaderField = $vichUploaderField;
+        $this->virtualField = $virtualField;
     }
 
     /**
@@ -108,24 +95,5 @@ final class LiipImagineSerializableField implements Annotation
         $this->virtualField = $virtualField;
 
         return $this;
-    }
-
-    private function checkOption(string $optionName, bool $canBeArray): bool
-    {
-        if (\array_key_exists($optionName, $this->options)) {
-            if (!\is_string($this->options[$optionName])) {
-                if ($canBeArray && !\is_array($this->options[$optionName])) {
-                    throw new \InvalidArgumentException(\sprintf(\sprintf('Option "%s" must be a array or string.', $optionName)));
-                }
-
-                if (!$canBeArray) {
-                    throw new \InvalidArgumentException(\sprintf(\sprintf('Option "%s" must be a string.', $optionName)));
-                }
-            }
-
-            return true;
-        }
-
-        return false;
     }
 }
