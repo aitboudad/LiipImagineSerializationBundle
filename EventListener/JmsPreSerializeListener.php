@@ -68,6 +68,10 @@ class JmsPreSerializeListener extends JmsSerializeListenerAbstract
                             }
                         }
 
+                        if ($value && filter_var($value, FILTER_VALIDATE_URL) !== false) {
+                            continue;
+                        }
+
                         if (!$liipAnnotation->getVirtualField()) {
                             $property->setValue($object, $this->serializeValue($liipAnnotation, $object, $value));
                         } elseif ($vichField && \array_key_exists('vichUploaderSerialize', $this->config) && $this->config['vichUploaderSerialize']) {
